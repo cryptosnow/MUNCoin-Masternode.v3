@@ -13,7 +13,6 @@ a qt wallet with at least 15000 coins
 a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
 
-=============================================================
 [Creating MN keys for a VPS instance in your local qt wallet]
 =============================================================
 
