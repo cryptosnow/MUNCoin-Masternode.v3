@@ -12,11 +12,8 @@ a qt wallet with at least 15000 coins
 
 a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
-Automated masternode installation
 
-If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files. Installs under the root.
-
-Creating MN keys for a VPS instance in your local qt wallet
+[Creating MN keys for a VPS instance in your local qt wallet]
 
 Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You will need to 
 
