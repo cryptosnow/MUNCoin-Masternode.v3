@@ -17,25 +17,61 @@ Automated masternode installation
 If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files. Installs under the root.
 
 Creating MN keys for a VPS instance in your local qt wallet
-Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You will need to restart the wallet for these to show up.
+
+Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You will need to 
+
+restart the wallet for these to show up.
+
 Create a new receiving address. Open menu File→ Receiving addressess… Click “+” button and enter a name for the address, for example mn1.
+
 Send exactly 15000 coins to this mn1 address. Wait for 15 confirmations of this transaction.
+
 Open a debug window via menu Tools→Debug window.
-Execute “masternode genkey” command. This will output your MN priv key, for example: 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF. Save it.
+
+Execute “masternode genkey” command. This will output your MN priv key, for example: 
+
+92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF. Save it.
+
 Execute “masternode outputs” command. This will output TX and output pairs of numbers, for example:
+
 {
 “a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df38d2d303d791acd4302f2”: “0”
 }
+
 Save both of these numbers. 7. Open the masternode.conf file via menu Tools→ Open Masternode Configuration File. Without any blank lines type in a space-delimited single line:
+
 
 mn1 YOUR_VPS_IP:12548 YOURPRIVKEY TX_OUTPUT TX_ID
 For example:
 
-mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
-Restart the wallet and go to the “Masternodes” tab. There in the tab “My Masternodes” you should see the entry of your masternode with the status “MISSING”.
-It is useful to lock the account holding the MN coins so that it would not be accidentally spent. To do this, if you have not done this yet go to the menu Settings→Options, choose tab Wallet, check the box “Enable coin control features”, then restart the wallet. Go to the Send tab, click “Inputs”, select “List mode”, select the line with your MN and 1000 coins in it, right click on it and select “Lock unspent”. The line should be grayed out now with a lock icon on it. To unlock chose “Unlock unspent”.
+
+mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF 
+
+a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
+
+Restart the wallet and go to the “Masternodes” tab. There in the tab “My Masternodes” you should see the entry of your masternode with 
+
+the status “MISSING”.
+
+
+It is useful to lock the account holding the MN coins so that it would not be accidentally spent. To do this, if you have not done this 
+
+yet go to the menu Settings→Options, choose tab Wallet, check the box “Enable coin control features”, then restart the wallet. Go to the 
+
+Send tab, click “Inputs”, select “List mode”, select the line with your MN and 1000 coins in it, right click on it and select “Lock 
+
+unspent”. The line should be grayed out now with a lock icon on it. To unlock chose “Unlock unspent”.
+
 Setting up a VPS
-Each MN requires a separate IP address so you would either need a different VPS per each MN or have more than one IP address per VPS and use “-datadir=YOURDATADIR” option to separate MN instances, whichever is cheaper, however having a separate instance has also advantages of more hardware resources available and higher reliability. Recommended node hardware includes 1GB RAM, single core CPU is sufficient, and at least 20 GB hard drive. Such node pricing starts at around USD $3-5/month. 
+
+Each MN requires a separate IP address so you would either need a different VPS per each MN or have more than one IP address per VPS and 
+
+use “-datadir=YOURDATADIR” option to separate MN instances, whichever is cheaper, however having a separate instance has also advantages 
+
+of more hardware resources available and higher reliability. Recommended node hardware includes 1GB RAM, single core CPU is sufficient, 
+
+and at least 20 GB hard drive. Such node pricing starts at around USD $3-5/month. 
+
 
 Popular VPS providers are:
 
@@ -53,6 +89,7 @@ http://www.putty.org/
 
 If you are setting a VPS on vultr.com from scratch you can do the following:
 
+
 Register on the site, login and pay $5 or more.
 Go to Servers tab on the left. Click on the “+” button in the top left corner with the tooltip “Deplow New Server”.
 (1) Select any location, (2) server type = Ubuntu 16.04, (3) server size = $5/mo (1 core, 1GB memory), (7) pick server hostname
@@ -60,17 +97,33 @@ Once the server is running in about 5-10 min click on the “...” on the right
 If you are on windows download and install Putty, if you are on linux you don’t need this section :)
 Run Putty, enter server IP and connect, clicking “yes” to save the new ssh key. Enter username=root and password from the previously saved details.
 
-Vultr already has the popular firewall ufw installed, on other distros or providers you may need to install it. Open ports 22 for ssh and 12548 for the masternode P2P network (22548 for testnet). Then enable the firewall.
+
+Vultr already has the popular firewall ufw installed, on other distros or providers you may need to install it. Open ports 22 for ssh 
+
+and 12548 for the masternode P2P network (22548 for testnet). Then enable the firewall.
+
 sudo ufw allow 22
+
 sudo ufw allow 12548
+
 sudo ufw enable
+
 To check current rules on an inactive ufw:
 
+
+
 sudo ufw show added
+
 To check current rules on an active ufw:
 
+
+
 sudo ufw status
-You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need are:
+
+You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need 
+
+are:
+
 “ls” – list files in the current directory
 
 “ls -la” – list files in the current directory including hidden files (.muncore is one of them)
@@ -89,40 +142,75 @@ You can now proceed with the rest of the guide specific to installation of the m
 
 “screen -R” – reconnect to previous screen session after a new login via putty.
 
+
 Installation of dependencies
-All installation commands require you either being a root or prepending them with sudo. First you need to update Ubuntu 16.04 distro via executing these 3 commands:
+
+All installation commands require you either being a root or prepending them with sudo. First you need to update Ubuntu 16.04 distro via 
+
+executing these 3 commands:
+
 
 apt-get update
+
 apt-get upgrade
+
 apt-get dist-upgrade
-The libraries you need to install: required: libssl, libboost, libevent, miniupnpc, libdb4.8 optional: libzmq3, libminiupnpc Editor: nano (or vim/emacs if you prefer)
+
+The libraries you need to install: required: libssl, libboost, libevent, miniupnpc, libdb4.8 optional: libzmq3, libminiupnpc Editor: 
+
+nano (or vim/emacs if you prefer)
+
 
 apt-get install software-properties-common nano libboost-all-dev libzmq3-dev libminiupnpc-dev libssl-dev libevent-dev
+
 add-apt-repository ppa:bitcoin/bitcoin
+
 apt-get update
+
 apt-get install libdb4.8-dev libdb4.8++-dev
+
 VPS node configuration
+
 Create mun directory and switch to it:
 
+
 mkdir mun
+
 cd mun
+
 Download and extract linux binaries:
 
+
 https://github.com/muncrypto/muncoin/releases/download/v0.1.0.3/muncoin_0.1.0.3_ubuntu_16.04.tar.gz
+
 tar -xvf muncoin_0.1.0.3_ubuntu_16.04.tar.gz
+
+
 You should have now the daemon mund and wallet mun-cli files in /home/YOURUSERNAME/mun directory. Start the daemon:
 
+
 ./mund -daemon
+
 You should see the output: Mun Core server starting
+
 
 Now stop the server:
 
+
 ./mun-cli stop
-You should see the output: Mun Core server stopping What this should have accomplished is creating a .muncore directory in your home directory and populating it with the config files so that you would not need to create them yourself. Go into .muncore directory:
+
+You should see the output: Mun Core server stopping What this should have accomplished is creating a .muncore directory in your home 
+
+directory and populating it with the config files so that you would not need to create them yourself.
+
+Go into .muncore directory:
 
 cd ~/.muncore
+
 You will need to edit 2 files : mun.conf and masternode.conf with nano or any other text editor:
+
 nano mun.conf
+
 nano masternode.conf
 
 In mun.conf you need to create unique user name, user password, masternode priv key (created in the qt local wallet step):
@@ -138,20 +226,27 @@ logtimestamps=1
 maxconnections=64
 masternode=1
 masternodeprivkey=YOUR_MASTERNODE_PRIV_KEY
+
+
 In masternode.conf file you need to copy/paste the line from the masternodes.conf file in the qt local wallet:
 
 mn1 YOUR_VPS_IP:12548 YOUR_MASTERNODE_PRIV_KEY TX_OUTPUT TX_ID
+
 For example:
 
 mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
 Now you can start the daemon again. Start the daemon:
 
+
 ./mund -daemon
+
 You should see the output: Mun Core server starting
+
 
 Let’s observe the node synchronization process. Execute:
 
 ./mun-cli getinfo
+
 The output should look similar to:
 
 {
