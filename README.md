@@ -13,8 +13,10 @@ a qt wallet with at least 15000 coins
 a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
 
-
+=============================================================
 [Creating MN keys for a VPS instance in your local qt wallet]
+=============================================================
+
 
 Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You will need to 
 
@@ -62,7 +64,10 @@ unspent”. The line should be grayed out now with a lock icon on it. To unlock 
 
 
 
+====================================================
 [Setting up a VPS]
+====================================================
+
 
 Each MN requires a separate IP address so you would either need a different VPS per each MN or have more than one IP address per VPS and 
 
@@ -99,20 +104,24 @@ Run Putty, enter server IP and connect, clicking “yes” to save the new ssh k
 
 
 
+==============================================
 [VPS Set Up]
+==============================================
 
 
 Vultr already has the popular firewall ufw installed, on other distros or providers you may need to install it. Open ports 22 for ssh 
 
 and 12548 for the masternode P2P network (22548 for testnet). 
 
-Then enable the firewall.
+
+Then enable the firewall:
 
 sudo ufw allow 22
 
 sudo ufw allow 12548
 
 sudo ufw enable
+
 
 To check current rules on an inactive ufw:
 
@@ -123,7 +132,7 @@ sudo ufw show added
 To check current rules on an active ufw:
 
 
-sudo ufw status
+s-udo ufw status
 
 
 
@@ -152,7 +161,9 @@ are:
 
 
 
+===============================================
 [Installation of dependencies]
+===============================================
 
 
 All installation commands require you either being a root or prepending them with sudo. First you need to update Ubuntu 16.04 distro via 
@@ -182,8 +193,9 @@ apt-get install libdb4.8-dev libdb4.8++-dev
 
 
 
+==============================================
 [VPS node configuration]
-
+==============================================
 
 Create mun directory and switch to it:
 
@@ -371,7 +383,10 @@ The output from an uninitialized MN will be similar to:
 }
 
 
-[Node start
+=========================================
+[Node start]
+=========================================
+
 
 The simplest way to start the masternode is from the local qt wallet. Go to your qt wallet “Masternodes” tab. Go there, switch to the 
 
@@ -383,10 +398,11 @@ currently have the status “MISSING”. If you have some already enabled nodes 
 
 all” because this will restart the already enabled nodes and place them at the end of the paying queue. The status should change to 
 
-“PRE_ENABLED” and some time later to “ENABLED” (varies, allow for up to 30 minutes). ]
+“PRE_ENABLED” and some time later to “ENABLED” (varies, allow for up to 30 minutes). 
 
 
 Check the masternode status on the VPS:
+
 
 ./mun-cli masternode status
 
@@ -411,12 +427,11 @@ If the masternode appears healthy but you are worried about payments not being w
 the list of masternode winners from either the cli wallet or the debug window:
 
 
-./mun-cli masternode winners
+-./mun-cli masternode winners
 
 The output should have all block assignments to MNs that will be paid from these blocks chosen by consensus vote by all MNs, similar to 
 
 this snapshot from the testnet:
-
 
 
 { 
@@ -498,8 +513,10 @@ sentinel setup guide. This status will be followed by NEW_START_REQUIRED, which 
 for a considerable stretch of time sufficient for the rest of the network to notice it.
 
 
-Installing Sentinel
 
+==========================================
+[Installing Sentinel]
+==========================================
 
 Sentinel is a python script that runs a series of tests on the masternode to make sure it is functioning properly and reports its status 
 
@@ -522,6 +539,7 @@ Go to Mun Directory:
 
 cd ~/mun
 
+
 Make sure all files in Cd Mun are deleated besides "mun.conf" and "masternode.conf"
 
 cd mun
@@ -530,9 +548,13 @@ ls -a
 
 (will show a list of all files)
 
+
 Rm -rf (type each file with a space inbetween to delete)
 
 ls -a again to confirm all that is left 
+
+
+Should be simular to :
 
 '.' '..' 'masternode.conf' and 'mun.conf'
 
@@ -546,7 +568,9 @@ Check the python version and make sure 2.7.x is installed:
 
 python --version
 
-The output should be 2.7.x, for example: Python 2.7.12 Clone sentinel script in a new directory under your home directory and switch to it:
+The output should be 2.7.x, for example: 
+
+Python 2.7.12 Clone sentinel script in a new directory under your home directory and switch to it:
 
 
 Switch to Mun Directory:
@@ -575,11 +599,13 @@ Create a python virtual environment folder under the sentinel folder:
 
 virtualenv ./venv
 
+
 Restore the python environment locally:
 
 ./venv/bin/pip install -r requirements.txt
 
 ./venv/bin/py.test ./test
+
 
 The output should be:
 
