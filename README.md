@@ -13,6 +13,7 @@ a qt wallet with at least 15000 coins
 a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
 
+
 [Creating MN keys for a VPS instance in your local qt wallet]
 
 Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You will need to 
@@ -51,7 +52,7 @@ Restart the wallet and go to the “Masternodes” tab. There in the tab “My M
 the status “MISSING”.
 
 
-It is useful to lock the account holding the MN coins so that it would not be accidentally spent. To do this, if you have not done this 
+*It is useful to lock the account holding the MN coins so that it would not be accidentally spent. To do this, if you have not done this 
 
 yet go to the menu Settings→Options, choose tab Wallet, check the box “Enable coin control features”, then restart the wallet. Go to the 
 
@@ -59,7 +60,9 @@ Send tab, click “Inputs”, select “List mode”, select the line with your 
 
 unspent”. The line should be grayed out now with a lock icon on it. To unlock chose “Unlock unspent”.
 
-Setting up a VPS
+
+
+[Setting up a VPS]
 
 Each MN requires a separate IP address so you would either need a different VPS per each MN or have more than one IP address per VPS and 
 
@@ -95,9 +98,15 @@ If you are on windows download and install Putty, if you are on linux you don’
 Run Putty, enter server IP and connect, clicking “yes” to save the new ssh key. Enter username=root and password from the previously saved details.
 
 
+
+[VPS Set Up]
+
+
 Vultr already has the popular firewall ufw installed, on other distros or providers you may need to install it. Open ports 22 for ssh 
 
-and 12548 for the masternode P2P network (22548 for testnet). Then enable the firewall.
+and 12548 for the masternode P2P network (22548 for testnet). 
+
+Then enable the firewall.
 
 sudo ufw allow 22
 
@@ -108,18 +117,20 @@ sudo ufw enable
 To check current rules on an inactive ufw:
 
 
-
 sudo ufw show added
+
 
 To check current rules on an active ufw:
 
 
-
 sudo ufw status
 
-You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need 
+
+
+*You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need 
 
 are:
+
 
 “ls” – list files in the current directory
 
@@ -140,7 +151,9 @@ are:
 “screen -R” – reconnect to previous screen session after a new login via putty.
 
 
-Installation of dependencies
+
+[Installation of dependencies]
+
 
 All installation commands require you either being a root or prepending them with sudo. First you need to update Ubuntu 16.04 distro via 
 
@@ -152,6 +165,7 @@ apt-get update
 apt-get upgrade
 
 apt-get dist-upgrade
+
 
 The libraries you need to install: required: libssl, libboost, libevent, miniupnpc, libdb4.8 optional: libzmq3, libminiupnpc Editor: 
 
@@ -166,7 +180,10 @@ apt-get update
 
 apt-get install libdb4.8-dev libdb4.8++-dev
 
-VPS node configuration
+
+
+[VPS node configuration]
+
 
 Create mun directory and switch to it:
 
@@ -174,6 +191,7 @@ Create mun directory and switch to it:
 mkdir mun
 
 cd mun
+
 
 Download and extract linux binaries:
 
@@ -196,13 +214,17 @@ Now stop the server:
 
 ./mun-cli stop
 
+
 You should see the output: Mun Core server stopping What this should have accomplished is creating a .muncore directory in your home 
 
 directory and populating it with the config files so that you would not need to create them yourself.
 
+
+
 Go into .muncore directory:
 
 cd ~/.muncore
+
 
 You will need to edit 2 files : mun.conf and masternode.conf with nano or any other text editor:
 
@@ -210,7 +232,9 @@ nano mun.conf
 
 nano masternode.conf
 
-In mun.conf you need to create unique user name, user password, masternode priv key (created in the qt local wallet step):
+
+*In mun.conf you need to create unique user name, user password, masternode priv key (created in the qt local wallet step):
+
 
 rpcuser=YOUR_USER_NAME
 rpcpassword=YOUR_PASSWORD
@@ -227,48 +251,78 @@ masternodeprivkey=YOUR_MASTERNODE_PRIV_KEY
 
 In masternode.conf file you need to copy/paste the line from the masternodes.conf file in the qt local wallet:
 
+
 mn1 YOUR_VPS_IP:12548 YOUR_MASTERNODE_PRIV_KEY TX_OUTPUT TX_ID
 
 For example:
 
 mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
+
+
 Now you can start the daemon again. Start the daemon:
 
 
 ./mund -daemon
 
-You should see the output: Mun Core server starting
+You should see the output:
+Mun Core server starting
 
 
 Let’s observe the node synchronization process. Execute:
+
 
 ./mun-cli getinfo
 
 The output should look similar to:
 
+
 {
-  "version": 10003,
-  "protocolversion": 70209,
-  "walletversion": 10003,
-  "balance": 0.00000000,
-  "privatesend_balance": 0.00000000,
-  "blocks": 1649,  
-  "timeoffset": 0,
-  "connections": 2,
-  "proxy": "",
-  "difficulty": 0.001688372435250589,
-  "testnet": false,
-  "keypoololdest": 1514425239,
-  "keypoolsize": 999,
-  "paytxfee": 0.00000000,
-  "relayfee": 0.00010000,
-  "errors": ""
+
+"version": 10003,
+
+"protocolversion": 70209,
+
+"walletversion": 10003,
+
+"balance": 0.00000000,
+
+"privatesend_balance": 0.00000000,
+
+"blocks": 1649,  
+
+"timeoffset": 0,
+
+"connections": 2,
+
+"proxy": "",
+
+"difficulty": 0.001688372435250589,
+
+"testnet": false,
+
+"keypoololdest": 1514425239,
+
+"keypoolsize": 999,
+
+"paytxfee": 0.00000000,
+
+"relayfee": 0.00010000,
+
+"errors": ""
+
 }
-We are looking for the block count to be positive and eventually matching the number of blocks indicated by the local wallet and block explorer.
+
+
+We are looking for the block count to be positive and eventually matching the number of blocks indicated by the local wallet and block 
+
+explorer.
+
 
 More checking:
 
+
 ./mun-cli mnsync status
+
 Should produce an output similar to:
 
 
@@ -294,7 +348,10 @@ Should produce an output similar to:
 }
 
 
-Periodically running the same command you will be able to see as different phases of synchronization complete making blockchain, MN list, MN winners list synchronized one by one. 
+Periodically running the same command you will be able to see as different phases of synchronization complete making blockchain, MN 
+
+list, MN winners list synchronized one by one. 
+
 
 Now you can check the masternode status:
 
@@ -314,7 +371,7 @@ The output from an uninitialized MN will be similar to:
 }
 
 
-Node start
+[Node start
 
 The simplest way to start the masternode is from the local qt wallet. Go to your qt wallet “Masternodes” tab. Go there, switch to the 
 
@@ -326,7 +383,7 @@ currently have the status “MISSING”. If you have some already enabled nodes 
 
 all” because this will restart the already enabled nodes and place them at the end of the paying queue. The status should change to 
 
-“PRE_ENABLED” and some time later to “ENABLED” (varies, allow for up to 30 minutes). 
+“PRE_ENABLED” and some time later to “ENABLED” (varies, allow for up to 30 minutes). ]
 
 
 Check the masternode status on the VPS:
