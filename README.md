@@ -63,7 +63,7 @@ unspent”. The line should be grayed out now with a lock icon on it. To unlock 
 
 
 
-====================================================
+
 [Setting up a VPS]
 ====================================================
 
@@ -103,7 +103,7 @@ Run Putty, enter server IP and connect, clicking “yes” to save the new ssh k
 
 
 
-==============================================
+
 [VPS Set Up]
 ==============================================
 
@@ -160,7 +160,7 @@ are:
 
 
 
-===============================================
+
 [Installation of dependencies]
 ===============================================
 
@@ -192,7 +192,6 @@ apt-get install libdb4.8-dev libdb4.8++-dev
 
 
 
-==============================================
 [VPS node configuration]
 ==============================================
 
@@ -382,7 +381,7 @@ The output from an uninitialized MN will be similar to:
 }
 
 
-=========================================
+
 [Node start]
 =========================================
 
@@ -513,7 +512,6 @@ for a considerable stretch of time sufficient for the rest of the network to not
 
 
 
-==========================================
 [Installing Sentinel]
 ==========================================
 
