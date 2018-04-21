@@ -1,13 +1,19 @@
 # MUNCoin-Masternode.v3
 MUNCoin Masternode Guide 0.1.0.3
 Mun Masternode Setup and Maintenance Guide
-~~
-While it is possible to run masternodes (MN) both in a local wallet as well as in a separate instance on Windows this guide describes the most popular way to set up a MN using a local Windows/Linux qt wallet and a Linux VPS server running a MN instance.
+
+
+While it is possible to run masternodes (MN) both in a local wallet as well as in a separate instance on Windows this guide describes 
+the most popular way to set up a MN using a local Windows/Linux qt wallet and a Linux VPS server running a MN instance.
 
 What you will need
+
 a qt wallet with at least 15000 coins
+
 a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
+
 Automated masternode installation
+
 If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files. Installs under the root.
 
 Creating MN keys for a VPS instance in your local qt wallet
