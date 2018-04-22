@@ -1,6 +1,7 @@
 # MUNCoin-Masternode.v3
 MUNCoin Masternode Guide 0.1.0.3
 Mun Masternode Setup and Maintenance Guide
+MUN DONATION ADDRESS: MK3qXqUr6dpHTuubp22DfAihyU1RnkMCUX
 
 
 While it is possible to run masternodes (MN) both in a local wallet as well as in a separate instance on Windows this guide describes 
@@ -79,7 +80,7 @@ and at least 20 GB hard drive. Such node pricing starts at around USD $3-5/month
 
 Popular VPS providers are:
 
-https://www.vultr.com/
+https://www.vultr.com/?ref=7370346 
 
 https://www.woothosting.com/
 
@@ -206,7 +207,7 @@ cd mun
 Download and extract linux binaries:
 
 
-https://github.com/muncrypto/muncoin/releases/download/v0.1.0.3/muncoin_0.1.0.3_ubuntu_16.04.tar.gz
+wget https://github.com/muncrypto/muncoin/releases/download/v0.1.0.3/muncoin_0.1.0.3_ubuntu_16.04.tar.gz
 
 tar -xvf muncoin_0.1.0.3_ubuntu_16.04.tar.gz
 
@@ -548,7 +549,9 @@ ls -a
 
 Rm -rf (type each file with a space inbetween to delete)
 
-ls -a again to confirm all that is left 
+rm -rf blocks debug.log netfulfilled.dat chainstate fee_estimates.dat mncache.dat peers.dat backups .cookie governance.dat mnpayments.dat wallet.dat banlist.dat db.log .lock
+
+ls -a again to confirm all that is left is mun.conf and masternode.conf
 
 
 Should be simular to :
@@ -651,11 +654,21 @@ crontab -e
 
 Choose number 2 nano to edit, enter the command and save. 
 
-* * * * * cd /root/mun/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
+ "* * * * * cd /root/mun/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1"
 
 
 To view debug output set the sentinel environment variable to anything non-zero then run the script:
 
-SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 
-Troubleshooting:
+Now Restart your mucore client after installing the crontab:
+
+cd
+
+cd mun
+
+./mun-cli stop
+
+./mund -daemon
+
+[MUN DONATION ADDRESS: MK3qXqUr6dpHTuubp22DfAihyU1RnkMCUX]
+==========================================================
