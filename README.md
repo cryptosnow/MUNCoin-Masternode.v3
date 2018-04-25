@@ -324,12 +324,10 @@ Go to Mun Directory:
        cd ~/mun
 
 Make sure all files in Cd Mun are deleted besides "mun.conf" and "masternode.conf"
-
-       cd mun
        
-ls -a (will show a list of all files)
-Rm -rf (type each file with a space in between to delete)
-ls -a again to confirm all that is left 
+       ls -a (will show a list of all files)
+       Rm -rf (type each file with a space in between to delete)
+       ls -a again to confirm all that is left 
 
 Should be simular to :
 
@@ -349,90 +347,60 @@ The output should be 2.7.x, for example:
 
 Switch to Mun Directory:
 
-cd ~/mun
-
-git clone https://github.com/muncrypto/sentinel.git
-
+       cd ~/mun
+       git clone https://github.com/muncrypto/sentinel.git
 
 Switch to sentinel directory:
 
-
-cd sentinel
+       cd sentinel
 
 Update system packages:
 
-sudo apt-get update
-
+       sudo apt-get update
 
 Install python virtualenv, which is a way of preserving and restoring python environment in a separate folder including all binaries and packages:
 
-sudo apt-get -y install virtualenv
-
+       sudo apt-get -y install virtualenv
 
 Create a python virtual environment folder under the sentinel folder:
 
-virtualenv ./venv
-
+       virtualenv ./venv
 
 Restore the python environment locally:
 
-./venv/bin/pip install -r requirements.txt
-
-./venv/bin/py.test ./test
-
+       ./venv/bin/pip install -r requirements.txt
+       ./venv/bin/py.test ./test
 
 The output should be:
 
+       ======================== test session starts ===================================
+              platform linux2 -- Python 2.7.12, pytest-3.0.1, py-1.4.31, pluggy-0.3.1
+              rootdir: /home/YOURUSERNAME/mun/sentinel, inifile:
+              collected 14 items 
+              test/integration/test_jsonrpc.py .
+              test/unit/test_misc.py .
+              test/unit/test_models.py ..
+              test/unit/test_mun_config.py .
+              test/unit/test_mund_data_shims.py ..
+              test/unit/test_muny_things.py ......
+              test/unit/test_submit_command.py .
+       ======================== 14 passed in 0.16 seconds =============================
 
-======================== test session starts ===================================
-
-platform linux2 -- Python 2.7.12, pytest-3.0.1, py-1.4.31, pluggy-0.3.1
-
-rootdir: /home/YOURUSERNAME/mun/sentinel, inifile: 
-
-collected 14 items 
-
-
-
-test/integration/test_jsonrpc.py .
-
-test/unit/test_misc.py .
-
-test/unit/test_models.py ..
-
-test/unit/test_mun_config.py .
-
-test/unit/test_mund_data_shims.py ..
-
-test/unit/test_muny_things.py ......
-
-test/unit/test_submit_command.py .
-
-
-
-======================== 14 passed in 0.16 seconds =============================
-
-Add the sentinel to your periodic task scheduler so that it runs every minute a command to get into your sentinel directory and run a 
-
-python script without reporting any errors:
-
+Add the sentinel to your periodic task scheduler so that it runs every minute a command to get into your sentinel directory and run a python script without reporting any errors:
 
 cd home:
 
-cd ~
+       cd ~
 
 Edit crontab 
 
-
-crontab -e
-
+       crontab -e
 Choose number 2 nano to edit, enter the command and save. 
 
-* * * * * cd /root/mun/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
-
+       * * * * * cd /root/mun/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
 
 To view debug output set the sentinel environment variable to anything non-zero then run the script:
 
-SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
+       SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 
 Troubleshooting:
