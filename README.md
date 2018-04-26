@@ -91,7 +91,7 @@ To check current rules on an inactive ufw:
 
 To check current rules on an active ufw:
 
-    s-udo ufw status
+    sudo ufw status
 
 12. You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need are:
 
