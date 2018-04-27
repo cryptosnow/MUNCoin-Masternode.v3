@@ -95,23 +95,15 @@ To check current rules on an active ufw:
 
 12. You can now proceed with the rest of the guide specific to installation of the masternode. Very useful commands and tools you will need are:
 
-“ls” – list files in the current directory
-
-“ls -la” – list files in the current directory including hidden files (.muncore is one of them)
-
-“pwd” – get current directory
-
-“~” – stands for your home directory, typically /home/YOUR_USERNAME
-
-“cd NEW_DIRECTORY”– change directory
-
-“pushd NEW_DIRECTORY” – change directory and push the old one on the stack
-
-“popd” – change to the previously used directory and pop it from the stack
-
-“screen” – multiple terminals in one
-
-“screen -R” – reconnect to previous screen session after a new login via putty.
+`ls` – list files in the current directory
+`ls -la` – list files in the current directory including hidden files (.muncore is one of them)
+`pwd` – get current directory
+`~` – stands for your home directory, typically /home/YOUR_USERNAME
+`cd NEW_DIRECTORY`– change directory
+`pushd NEW_DIRECTORY` – change directory and push the old one on the stack
+`popd` – change to the previously used directory and pop it from the stack
+`screen` – multiple terminals in one
+`screen -R` – reconnect to previous screen session after a new login via putty.
 
 [Installation of dependencies]
 ===============================================
