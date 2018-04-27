@@ -7,7 +7,7 @@ While it is possible to run masternodes (MN) both in a local wallet as well as i
 
 What you will need:
 
--A qt wallet with at least 15000 coins
+-A qt wallet with at least 15000 coins  
 -A VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
 
@@ -396,3 +396,34 @@ To view debug output set the sentinel environment variable to anything non-zero 
        SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 
 Troubleshooting:
+If you are having issues with your VPS wallet the first thing to do is check your block:
+`cd
+cd mun
+./mun-cli getinfo`
+Your Output should look like this:
+
+    {
+     "version": 10003,
+     "protocolversion": 70209,
+     "walletversion": 10003,
+     "balance": 0.00000000,
+     "privatesend_balance": 0.00000000,
+     "blocks": 1649,  
+     "timeoffset": 0,
+     "connections": 2,
+     "proxy": "",
+     "difficulty": 0.001688372435250589,
+     "testnet": false,
+     "keypoololdest": 1514425239,
+     "keypoolsize": 999,
+     "paytxfee": 0.00000000,
+     "relayfee": 0.00010000,
+     "errors": ""
+    }
+Take a look at the "blocks" if you suspect it to be off reindex the VPS, to do this copy and paste the lines below:
+`cd 
+cd mun
+./mun-cli stop
+./mund --reindex
+cd`
+Wait 30 minutes and it should be back up!
