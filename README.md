@@ -400,9 +400,9 @@ To view debug output set the sentinel environment variable to anything non-zero 
 Troubleshooting:
 If you are having issues with your VPS wallet the first thing to do is check your block:
 
-```cd  
-cd mun  
-./mun-cli getinfo```
+       cd  
+       cd mun  
+       ./mun-cli getinfo
 
 Your Output should look like this:
 
@@ -426,10 +426,10 @@ Your Output should look like this:
     }
 Take a look at the "blocks" if you suspect it to be off reindex the VPS, to do this copy and paste the lines below:
 
-```cd  
-cd mun  
-./mun-cli stop  
-./mund --reindex  
-cd```
+       cd  
+       cd mun  
+       ./mun-cli stop  
+       ./mund --reindex  
+       cd
 
 Wait 30 minutes and it should be back up!
