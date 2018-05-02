@@ -147,7 +147,7 @@ Now stop the server:
 
 You should see the output: Mun Core server stopping What this should have accomplished is creating a .muncore directory in your home directory and populating it with the config files so that you would not need to create them yourself. Go into .muncore directory:
 
-cd ~/.muncore
+    cd ~/.muncore
 
 You will need to edit 2 files : mun.conf and masternode.conf with nano or any other text editor:
 
@@ -382,7 +382,7 @@ Add the sentinel to your periodic task scheduler so that it runs every minute a 
 
 cd home:
 
-       cd ~
+       cd 
 
 Edit crontab 
 
