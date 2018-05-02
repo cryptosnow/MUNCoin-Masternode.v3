@@ -311,6 +311,8 @@ On the mainnet you should see a series of upcoming 20 blocks all assigned to MNs
 
 Sentinel is a python script that runs a series of tests on the masternode to make sure it is functioning properly and reports its status to the network. Absence of sentinel may cause the status changed from ENABLED to WATCHDOG_EXPIRED followed by NEW_START_REQUIRED. While under the WATCHDOG_EXPIRED your node will still get paid it does not constitute normal behavior and you will need to install a sentinel. If your node is ENABLED and runs fine you do not need to install sentinel script until further notice when the governance and superblocks are enabled and proper voting rights will be essential. This guide covers the installation of the sentinel on a VPS running Ubuntu 16.04 where your MN is setup. Make sure the mun.conf is fully configured as described in the masternode setup guide and contains rpc user name, password, and a line “server=1” that allows for the node to listen to rpc commands otherwise you will get “Connection refused” error.
 
+**Note: If you already have Sentinel installed start here, if not skip down to "Go to home directory:"***
+
 Go to Mun Directory:
 
        cd ~/mun
